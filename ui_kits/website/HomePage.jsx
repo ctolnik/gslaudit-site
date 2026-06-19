@@ -1,12 +1,56 @@
-// GSL Audit website — Home page (реальный контент, фото, анимации)
+// GSL Audit website — Home page (реальный контент, фото, анимации, блоки доверия/конверсии/контента)
 (function () {
   const React = window.React;
   const NS = window.GSLAuditDesignSystem_166977;
-  const { Button, ServiceCard, Tag, Card, Badge } = NS;
+  const { Button, ServiceCard, Tag, Card, Badge, Accordion } = NS;
   const I = window.GSLIcons;
-  const { services, categories, stats, team, certs, testimonials } = window.GSLData;
+  const D = window.GSLData;
+  const { services, categories, stats, team, certs, testimonials, trustBadges, clients, cases, blog, taxDates, faq } = D;
 
   const initials = (name) => name.split(" ").slice(0, 2).map((w) => w[0]).join("");
+
+  // --- Калькулятор стоимости (интерактивная заглушка) ---
+  function Calculator({ navigate }) {
+    const base = { "Бухгалтерское обслуживание": 15000, "Аудит": 80000, "Налоговое консультирование": 12000 };
+    const opsF = { "до 30": 1, "30–100": 1.6, "100–300": 2.4, "300+": 3.5 };
+    const unit = { "Бухгалтерское обслуживание": "₽ / мес", "Аудит": "₽", "Налоговое консультирование": "₽" };
+    const [service, setService] = React.useState("Бухгалтерское обслуживание");
+    const [tax, setTax] = React.useState("УСН");
+    const [ops, setOps] = React.useState("30–100");
+    const [ved, setVed] = React.useState(false);
+    const price = Math.round(base[service] * (tax === "ОСНО" ? 1.5 : 1) * opsF[ops] * (ved ? 1.25 : 1) / 1000) * 1000;
+    return (
+      <div className="calc reveal">
+        <div className="calc__form">
+          <label className="calc__field"><span>Услуга</span>
+            <select value={service} onChange={(e) => setService(e.target.value)}>
+              {Object.keys(base).map((k) => <option key={k}>{k}</option>)}
+            </select>
+          </label>
+          <label className="calc__field"><span>Система налогообложения</span>
+            <select value={tax} onChange={(e) => setTax(e.target.value)}>
+              <option>УСН</option><option>ОСНО</option>
+            </select>
+          </label>
+          <label className="calc__field"><span>Операций в месяц</span>
+            <select value={ops} onChange={(e) => setOps(e.target.value)}>
+              {Object.keys(opsF).map((k) => <option key={k}>{k}</option>)}
+            </select>
+          </label>
+          <label className="calc__check">
+            <input type="checkbox" checked={ved} onChange={(e) => setVed(e.target.checked)} />
+            <span>ВЭД / валютные операции</span>
+          </label>
+        </div>
+        <div className="calc__result">
+          <div className="calc__result-label">Ориентировочная стоимость</div>
+          <div className="calc__result-value gsl-tnum">от {price.toLocaleString("ru-RU")}&nbsp;<span>{unit[service]}</span></div>
+          <p className="calc__note">Предварительный расчёт. Точную стоимость назовём после короткого разговора.</p>
+          <Button variant="inverse" size="lg" fullWidth onClick={() => navigate("contacts")} iconRight={<I.ArrowRight width={18} height={18} />}>Получить точный расчёт</Button>
+        </div>
+      </div>
+    );
+  }
 
   function HomePage({ navigate }) {
     const [filter, setFilter] = React.useState("Все услуги");
@@ -39,6 +83,21 @@
           </div>
         </section>
 
+        {/* Trust badges */}
+        <section className="container">
+          <div className="trust-strip reveal">
+            {trustBadges.map((b, i) => {
+              const Ic = I[b.ic];
+              return (
+                <div key={i} className="trust-badge">
+                  <span className="trust-badge__ic"><Ic width={20} height={20} /></span>
+                  <span>{b.t}</span>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
         {/* Stats */}
         <section className="container">
           <div className="stats reveal" style={{ borderTop: "1px solid var(--divider)", borderBottom: "1px solid var(--divider)", padding: "var(--space-12) 0" }}>
@@ -48,6 +107,17 @@
                 <div className="stat__l">{s.label}</div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Clients */}
+        <section className="section--tight container">
+          <div className="sec-head reveal" style={{ textAlign: "center", marginLeft: "auto", marginRight: "auto", marginBottom: "var(--space-8)" }}>
+            <span className="gsl-eyebrow">Нам доверяют</span>
+            <h2 style={{ fontSize: "var(--fs-h3)" }}>Более 300 компаний и частных клиентов</h2>
+          </div>
+          <div className="clients reveal">
+            {clients.map((c) => <div key={c} className="client-logo">{c}</div>)}
           </div>
         </section>
 
@@ -73,6 +143,38 @@
                 </div>
               );
             })}
+          </div>
+        </section>
+
+        {/* Calculator */}
+        <section className="section--tight" style={{ background: "var(--surface-accent-soft)", borderTop: "1px solid var(--divider)", borderBottom: "1px solid var(--divider)" }}>
+          <div className="container">
+            <div className="sec-head reveal" style={{ marginBottom: "var(--space-8)" }}>
+              <span className="gsl-eyebrow"><I.Calc width={13} height={13} style={{ verticalAlign: "-2px", marginRight: 4 }} />Калькулятор</span>
+              <h2>Рассчитайте стоимость за минуту</h2>
+              <p>Прикиньте ориентировочную стоимость — точную цену назовём после короткого разговора.</p>
+            </div>
+            <Calculator navigate={navigate} />
+          </div>
+        </section>
+
+        {/* Cases */}
+        <section className="section container">
+          <div className="sec-head reveal">
+            <span className="gsl-eyebrow">Результаты</span>
+            <h2>Кейсы и достигнутые результаты</h2>
+            <p>Несколько примеров задач, которые мы закрыли для клиентов.</p>
+          </div>
+          <div className="grid-3">
+            {cases.map((c, i) => (
+              <div key={i} className="case-card reveal" data-d={(i % 3) + 1}>
+                <span className="case-card__tag">{c.tag}</span>
+                <div className="case-card__result gsl-tnum">{c.result}</div>
+                <div className="case-card__rlabel">{c.resultLabel}</div>
+                <div className="case-card__title">{c.title}</div>
+                <p className="case-card__desc">{c.desc}</p>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -154,20 +256,75 @@
           </div>
         </section>
 
-        {/* Testimonials */}
+        {/* Tax calendar */}
         <section className="section container">
-          <div className="sec-head reveal"><span className="gsl-eyebrow">Отзывы</span><h2>Что говорят клиенты</h2></div>
-          <div className="grid-2">
-            {testimonials.map((t, i) => (
-              <Card key={t.name} padding="lg" className="reveal" data-d={i + 1} style={{ background: "var(--surface-card)" }}>
-                <I.Quote width={26} height={26} style={{ color: "var(--green-300)" }} />
-                <p style={{ fontFamily: "var(--font-display)", fontSize: "var(--fs-body-lg)", lineHeight: "var(--lh-relaxed)", color: "var(--text-strong)", margin: "var(--space-3) 0 var(--space-5)" }}>«{t.quote}»</p>
-                <div>
-                  <div style={{ fontWeight: "var(--fw-semibold)", color: "var(--text-strong)", fontSize: "var(--fs-small)" }}>{t.name}</div>
-                  <div style={{ color: "var(--text-muted)", fontSize: "var(--fs-caption)" }}>{t.role}</div>
+          <div className="sec-head reveal">
+            <span className="gsl-eyebrow"><I.Calendar width={13} height={13} style={{ verticalAlign: "-2px", marginRight: 4 }} />Налоговый календарь</span>
+            <h2>Ближайшие сроки отчётности</h2>
+            <p>Не пропустите дедлайны — мы напоминаем и готовим отчётность заранее.</p>
+          </div>
+          <div className="taxcal">
+            {taxDates.map((d, i) => (
+              <div key={i} className="taxcal__row reveal" data-d={(i % 4) + 1}>
+                <div className="taxcal__date"><span className="taxcal__d">{d.d}</span><span className="taxcal__m">{d.m}</span></div>
+                <div className="taxcal__body">
+                  <div className="taxcal__t">{d.t}</div>
+                  <div className="taxcal__who">{d.who}</div>
                 </div>
-              </Card>
+              </div>
             ))}
+          </div>
+        </section>
+
+        {/* Blog */}
+        <section className="section--tight" style={{ background: "var(--surface-card)", borderTop: "1px solid var(--divider)", borderBottom: "1px solid var(--divider)" }}>
+          <div className="container">
+            <div className="sec-head reveal" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", maxWidth: "none", marginBottom: "var(--space-10)" }}>
+              <div>
+                <span className="gsl-eyebrow">Публикации</span>
+                <h2>Блог и новости законодательства</h2>
+              </div>
+              <Button variant="ghost" onClick={() => navigate("home")} iconRight={<I.ArrowRight width={16} height={16} />}>Все публикации</Button>
+            </div>
+            <div className="grid-4">
+              {blog.map((b, i) => (
+                <article key={i} className="post-card reveal" data-d={(i % 4) + 1} onClick={() => navigate("home")}>
+                  <div className="post-card__meta"><span className="post-card__cat">{b.cat}</span><span>{b.date}</span></div>
+                  <h3 className="post-card__title">{b.title}</h3>
+                  <span className="post-card__more">Читать <I.ArrowRight width={14} height={14} /></span>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="section container">
+          <div className="sec-head reveal">
+            <span className="gsl-eyebrow">Вопросы</span>
+            <h2>Частые вопросы</h2>
+          </div>
+          <div className="faq-wrap reveal">
+            <Accordion items={faq} defaultOpen={[0]} />
+          </div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="section--tight" style={{ background: "var(--surface-card)", borderTop: "1px solid var(--divider)", borderBottom: "1px solid var(--divider)" }}>
+          <div className="container">
+            <div className="sec-head reveal"><span className="gsl-eyebrow">Отзывы</span><h2>Что говорят клиенты</h2></div>
+            <div className="grid-2">
+              {testimonials.map((t, i) => (
+                <Card key={t.name} padding="lg" className="reveal" data-d={i + 1} style={{ background: "var(--bg-page)" }}>
+                  <I.Quote width={26} height={26} style={{ color: "var(--green-300)" }} />
+                  <p style={{ fontFamily: "var(--font-display)", fontSize: "var(--fs-body-lg)", lineHeight: "var(--lh-relaxed)", color: "var(--text-strong)", margin: "var(--space-3) 0 var(--space-5)" }}>«{t.quote}»</p>
+                  <div>
+                    <div style={{ fontWeight: "var(--fw-semibold)", color: "var(--text-strong)", fontSize: "var(--fs-small)" }}>{t.name}</div>
+                    <div style={{ color: "var(--text-muted)", fontSize: "var(--fs-caption)" }}>{t.role}</div>
+                  </div>
+                </Card>
+              ))}
+            </div>
           </div>
         </section>
 
