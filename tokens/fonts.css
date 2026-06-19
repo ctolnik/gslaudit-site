@@ -1,0 +1,19 @@
+/* GSL Audit — Webfonts
+ * Loaded from Google Fonts CDN (Cyrillic + Latin subsets).
+ * Display:  Source Serif 4 — authoritative contemporary serif, full Cyrillic.
+ * Text/UI:  Manrope        — modern geometric grotesque, full Cyrillic.
+ * Mono:     JetBrains Mono — tabular figures for tables/financials.
+ * NOTE: For production, self-host licensed .woff2 files and replace this @import. */
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-sans: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* semantic aliases */
+  --font-heading: var(--font-display);
+  --font-body: var(--font-sans);
+  --font-ui: var(--font-sans);
+}

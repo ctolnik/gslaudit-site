@@ -1,0 +1,58 @@
+/* GSL Audit — Component interaction states
+ * Hover / active / focus that can't live in inline styles.
+ * Components render with class names (.gsl-btn--primary, etc). */
+
+/* ---------- Button ---------- */
+.gsl-btn:focus-visible { box-shadow: var(--shadow-focus); }
+.gsl-btn:not(:disabled):active { transform: translateY(0.5px); }
+
+.gsl-btn--primary:not(:disabled):hover { background: var(--accent-hover) !important; border-color: var(--accent-hover) !important; }
+.gsl-btn--primary:not(:disabled):active { background: var(--accent-active) !important; border-color: var(--accent-active) !important; }
+
+.gsl-btn--secondary:not(:disabled):hover { border-color: var(--border-strong) !important; background: var(--neutral-50) !important; }
+.gsl-btn--secondary:not(:disabled):active { background: var(--neutral-100) !important; }
+
+.gsl-btn--ghost:not(:disabled):hover { background: var(--accent-soft) !important; }
+.gsl-btn--ghost:not(:disabled):active { background: var(--accent-soft-hover) !important; }
+
+.gsl-btn--soft:not(:disabled):hover { background: var(--accent-soft-hover) !important; }
+
+.gsl-btn--inverse:not(:disabled):hover { background: var(--neutral-100) !important; border-color: var(--neutral-100) !important; }
+
+/* ---------- Icon button ---------- */
+.gsl-iconbtn { transition: background-color var(--dur-fast) var(--ease-standard), color var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard); }
+.gsl-iconbtn:focus-visible { box-shadow: var(--shadow-focus); }
+.gsl-iconbtn--ghost:not(:disabled):hover { background: var(--neutral-100) !important; color: var(--text-strong) !important; }
+.gsl-iconbtn--soft:not(:disabled):hover { background: var(--accent-soft-hover) !important; }
+.gsl-iconbtn--solid:not(:disabled):hover { background: var(--accent-hover) !important; }
+
+/* ---------- Inputs ---------- */
+.gsl-input:focus, .gsl-textarea:focus, .gsl-select:focus {
+  outline: none;
+  border-color: var(--accent) !important;
+  box-shadow: var(--shadow-focus);
+}
+.gsl-input::placeholder, .gsl-textarea::placeholder { color: var(--text-faint); }
+.gsl-input:hover:not(:focus), .gsl-textarea:hover:not(:focus), .gsl-select:hover:not(:focus) { border-color: var(--border-strong) !important; }
+
+/* ---------- Card (interactive) ---------- */
+.gsl-card--interactive { transition: box-shadow var(--dur-base) var(--ease-standard), transform var(--dur-base) var(--ease-standard), border-color var(--dur-base) var(--ease-standard); }
+.gsl-card--interactive:hover { box-shadow: var(--shadow-card-hover) !important; transform: translateY(-2px); border-color: var(--border-default) !important; }
+
+/* ---------- Links in prose ---------- */
+.gsl-link { color: var(--text-link); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--text-link) 30%, transparent); transition: border-color var(--dur-fast) var(--ease-standard); }
+.gsl-link:hover { border-bottom-color: var(--text-link); }
+
+/* ---------- Switch / checkbox track transitions ---------- */
+.gsl-switch-track { transition: background-color var(--dur-base) var(--ease-standard); }
+.gsl-switch-thumb { transition: transform var(--dur-base) var(--ease-emphasized); }
+.gsl-check-box { transition: background-color var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard); }
+
+/* checked states (hidden native input + styled sibling) */
+input[type="checkbox"]:checked + .gsl-check-box { background: var(--accent); border-color: var(--accent); }
+input[type="checkbox"]:checked + .gsl-check-box svg { opacity: 1 !important; }
+input[type="checkbox"]:focus-visible + .gsl-check-box { box-shadow: var(--shadow-focus); }
+
+input[role="switch"]:checked + .gsl-switch-track { background: var(--accent); }
+input[role="switch"]:checked + .gsl-switch-track .gsl-switch-thumb { transform: translateX(18px); }
+input[role="switch"]:focus-visible + .gsl-switch-track { box-shadow: var(--shadow-focus); }

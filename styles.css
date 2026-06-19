@@ -1,0 +1,12 @@
+/* GSL Audit — Design System
+ * Global stylesheet entry point. Consumers link THIS one file.
+ * Keep this as @import lines only — no inline rules. */
+
+@import url("tokens/fonts.css");
+@import url("tokens/colors.css");
+@import url("tokens/typography.css");
+@import url("tokens/spacing.css");
+@import url("tokens/radius.css");
+@import url("tokens/motion.css");
+@import url("tokens/base.css");
+@import url("tokens/components.css");

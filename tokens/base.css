@@ -1,0 +1,62 @@
+/* GSL Audit — Base / reset
+ * Minimal, opinionated defaults so consumers inherit the brand foundation. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-relaxed);
+  font-weight: var(--fw-regular);
+  color: var(--text-body);
+  background-color: var(--bg-page);
+  font-feature-settings: "kern", "liga", "calt";
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: var(--font-display);
+  color: var(--text-strong);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-tight);
+}
+h5, h6 { font-family: var(--font-body); }
+
+p { margin: 0; }
+
+a {
+  color: var(--text-link);
+  text-decoration: none;
+  transition: var(--transition-colors);
+}
+a:hover { color: var(--accent-hover); }
+
+button { font-family: inherit; }
+
+::selection { background: var(--green-200); color: var(--green-950); }
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: var(--radius-xs);
+}
+
+/* Tabular figures helper for financial/numeric content */
+.gsl-tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

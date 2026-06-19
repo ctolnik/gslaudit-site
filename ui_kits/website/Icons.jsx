@@ -1,0 +1,36 @@
+// GSL Audit — icon set (Lucide, MIT-licensed paths) as lightweight React components.
+// Consistent 24px grid, 1.8 stroke, round caps. Add to window for cross-file use.
+(function () {
+  const React = window.React;
+  const S = (paths, props = {}) =>
+    React.createElement(
+      "svg",
+      Object.assign({ width: 24, height: 24, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round", strokeLinejoin: "round" }, props),
+      paths.map((d, i) => React.createElement("path", { key: i, d }))
+    );
+
+  const Icons = {
+    ShieldCheck: (p) => S(["M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z", "m9 12 2 2 4-4"], p),
+    Calculator: (p) => S(["M4 3a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z", "M8 6h8M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14v4M8 18h4"], p),
+    Receipt: (p) => S(["M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z", "M8 7h8M8 11h8M8 15h5"], p),
+    Scale: (p) => S(["m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z", "m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z", "M7 21h10M12 3v18M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"], p),
+    Globe: (p) => S(["M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z", "M2 12h20", "M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"], p),
+    Briefcase: (p) => S(["M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16", "M4 7h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"], p),
+    Building: (p) => S(["M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z", "M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4M10 18h4"], p),
+    FileText: (p) => S(["M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z", "M14 2v6h6M9 13h6M9 17h4"], p),
+    TrendingUp: (p) => S(["M16 7h6v6", "m22 7-8.5 8.5-5-5L2 17"], p),
+    Users: (p) => S(["M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2", "M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"], p),
+    Phone: (p) => S(["M13.83 19.72A16 16 0 0 1 4.28 10.17 6.5 6.5 0 0 1 4.1 4.18 2 2 0 0 1 6.1 3h3a2 2 0 0 1 2 1.72c.13 1 .35 1.95.66 2.87a2 2 0 0 1-.45 2.11L9.1 11.91a16 16 0 0 0 3 3l1.21-1.21a2 2 0 0 1 2.11-.45c.92.3 1.88.53 2.87.66A2 2 0 0 1 21 16v3a2 2 0 0 1-2.18 2 16 16 0 0 1-4.99-1.28Z"], p),
+    Mail: (p) => S(["M22 6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2z", "m22 7-10 6L2 7"], p),
+    MapPin: (p) => S(["M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z", "M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"], p),
+    ArrowRight: (p) => S(["M5 12h14M13 6l6 6-6 6"], p),
+    ArrowUpRight: (p) => S(["M7 7h10v10", "M7 17 17 7"], p),
+    Check: (p) => S(["M20 6 9 17l-5-5"], p),
+    Menu: (p) => S(["M4 6h16M4 12h16M4 18h16"], p),
+    Clock: (p) => S(["M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z", "M12 6v6l4 2"], p),
+    Star: (p) => S(["M11.5 2.6a.5.5 0 0 1 .9 0l2.6 5.3 5.8.8a.5.5 0 0 1 .3.9l-4.2 4.1 1 5.8a.5.5 0 0 1-.7.5L12 17.3l-5.2 2.7a.5.5 0 0 1-.7-.5l1-5.8L2.9 9.6a.5.5 0 0 1 .3-.9l5.8-.8z"], p),
+    Quote: (p) => S(["M3 21c3 0 7-1 7-8V5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2c0 3-1 4-3 4zM14 21c3 0 7-1 7-8V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2c0 3-1 4-3 4z"], p),
+  };
+
+  window.GSLIcons = Icons;
+})();

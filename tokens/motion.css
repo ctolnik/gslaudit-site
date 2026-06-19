@@ -1,0 +1,19 @@
+/* GSL Audit — Motion
+ * Restrained, premium. Quick functional transitions; gentle ease. No bounce. */
+:root {
+  --dur-instant: 80ms;  /* @kind other */
+  --dur-fast: 140ms;    /* @kind other */
+  --dur-base: 220ms;    /* @kind other */
+  --dur-slow: 360ms;    /* @kind other */
+  --dur-slower: 600ms;  /* @kind other */
+
+  --ease-standard: cubic-bezier(0.22, 0.61, 0.36, 1);   /* @kind other */
+  --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);     /* @kind other */
+  --ease-in-out: cubic-bezier(0.65, 0.05, 0.36, 1);     /* @kind other */
+
+  --transition-colors: color var(--dur-fast) var(--ease-standard),
+                       background-color var(--dur-fast) var(--ease-standard),
+                       border-color var(--dur-fast) var(--ease-standard); /* @kind other */
+  --transition-transform: transform var(--dur-base) var(--ease-standard); /* @kind other */
+  --transition-shadow: box-shadow var(--dur-base) var(--ease-standard);   /* @kind other */
+}

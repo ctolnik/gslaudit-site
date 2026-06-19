@@ -1,0 +1,92 @@
+/* GSL Audit — Color system
+ * Brand greens are derived from the logo sage (#93C6BA), deepened for a premium,
+ * high-contrast accent. Warm taupe (#AE8981, logo variant) is a secondary accent.
+ * Neutrals carry a faint green tint so the palette reads as one cohesive family. */
+
+:root {
+  /* ---- Brand green scale ---- */
+  --green-950: #0A2D27;
+  --green-900: #0E3A33;
+  --green-800: #134A41;
+  --green-700: #1B5E54;   /* primary accent */
+  --green-600: #2A7468;
+  --green-500: #3E8F81;
+  --green-400: #6FB3A6;
+  --green-300: #93C6BA;   /* logo sage */
+  --green-200: #BFE0D8;
+  --green-100: #E3F1ED;
+  --green-50:  #F2F8F6;
+
+  /* ---- Warm taupe (secondary accent) ---- */
+  --taupe-700: #6F4E46;
+  --taupe-600: #8A655C;
+  --taupe-500: #AE8981;   /* logo taupe variant */
+  --taupe-400: #C4A39C;
+  --taupe-300: #D8C0BA;
+  --taupe-100: #F2E9E6;
+
+  /* ---- Neutrals (warm-green tinted slate) ---- */
+  --neutral-950: #14201D;  /* ink */
+  --neutral-900: #1C2A27;
+  --neutral-800: #2A3935;
+  --neutral-700: #3C4B47;
+  --neutral-600: #566561;
+  --neutral-500: #74827E;
+  --neutral-400: #98A4A0;
+  --neutral-300: #C2CBC7;
+  --neutral-200: #DFE5E2;
+  --neutral-150: #E9EDEB;
+  --neutral-100: #F1F4F2;
+  --neutral-50:  #F8FAF9;
+  --white: #FFFFFF;
+
+  /* ---- Semantic status ---- */
+  --success: #1F7A5B;
+  --success-soft: #E3F1EB;
+  --warning: #A86B12;
+  --warning-soft: #F8EDD8;
+  --danger:  #B23A2C;
+  --danger-soft: #F7E4E1;
+  --info:    #2A6F9E;
+  --info-soft: #E2EEF5;
+
+  /* ================= Semantic aliases ================= */
+  /* surfaces */
+  --bg-page: var(--neutral-50);
+  --surface-card: var(--white);
+  --surface-sunken: var(--neutral-100);
+  --surface-raised: var(--white);
+  --surface-inverse: var(--green-950);
+  --surface-accent: var(--green-700);
+  --surface-accent-soft: var(--green-100);
+  --surface-taupe-soft: var(--taupe-100);
+
+  /* text */
+  --text-strong: var(--neutral-950);
+  --text-body: var(--neutral-800);
+  --text-muted: var(--neutral-600);
+  --text-faint: var(--neutral-500);
+  --text-on-accent: var(--white);
+  --text-on-inverse: var(--neutral-100);
+  --text-accent: var(--green-700);
+  --text-link: var(--green-700);
+
+  /* accent */
+  --accent: var(--green-700);
+  --accent-hover: var(--green-800);
+  --accent-active: var(--green-900);
+  --accent-soft: var(--green-100);
+  --accent-soft-hover: var(--green-200);
+  --accent-on-soft: var(--green-800);
+
+  /* borders & lines */
+  --border-subtle: var(--neutral-200);
+  --border-default: var(--neutral-300);
+  --border-strong: var(--neutral-400);
+  --border-accent: var(--green-700);
+  --divider: var(--neutral-150);
+
+  /* focus ring */
+  --ring: color-mix(in srgb, var(--green-700) 45%, transparent);
+  --ring-offset: var(--bg-page);
+}
