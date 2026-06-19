@@ -3,7 +3,7 @@
   const React = window.React;
   const { Button } = window.GSLAuditDesignSystem_166977;
   const I = window.GSLIcons;
-  const { navServices } = window.GSLData;
+  const { navServices, contacts } = window.GSLData;
 
   function Header({ navigate }) {
     return (
@@ -20,7 +20,7 @@
           </nav>
           <div className="hdr__spacer" />
           <div className="hdr__actions">
-            <span className="hdr__phone">+7 495 234-38-44</span>
+            <span className="hdr__phone">{contacts.phones[0]}</span>
             <Button variant="primary" size="sm" onClick={() => navigate("contacts")}>Оставить заявку</Button>
             <button className="hdr__burger gsl-iconbtn gsl-iconbtn--ghost"
               style={{ width: 42, height: 42, border: "1px solid var(--border-default)", borderRadius: "var(--radius-md)", background: "transparent", color: "var(--text-strong)", alignItems: "center", justifyContent: "center" }}

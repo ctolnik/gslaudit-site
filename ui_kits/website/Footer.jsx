@@ -2,6 +2,7 @@
 (function () {
   const React = window.React;
   const I = window.GSLIcons;
+  const { contacts } = window.GSLData;
 
   function Col({ title, links, navigate }) {
     return (
@@ -23,17 +24,17 @@
                 Аудит, бухгалтерия, налоги и юридическое сопровождение бизнеса и частных лиц — в России и за рубежом.
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: "var(--space-6)" }}>
-                <span style={{ display: "flex", gap: 10, alignItems: "center", color: "var(--neutral-300)", fontSize: "var(--fs-small)" }}><I.Phone width={16} height={16} /> +7 495 234-38-44</span>
-                <span style={{ display: "flex", gap: 10, alignItems: "center", color: "var(--neutral-300)", fontSize: "var(--fs-small)" }}><I.Mail width={16} height={16} /> info@gsl.ru</span>
-                <span style={{ display: "flex", gap: 10, alignItems: "center", color: "var(--neutral-300)", fontSize: "var(--fs-small)" }}><I.MapPin width={16} height={16} /> Москва, ул. Маросейка, 6/8с1</span>
+                <span style={{ display: "flex", gap: 10, alignItems: "center", color: "var(--neutral-300)", fontSize: "var(--fs-small)" }}><I.Phone width={16} height={16} /> {contacts.phones[0]}</span>
+                <span style={{ display: "flex", gap: 10, alignItems: "center", color: "var(--neutral-300)", fontSize: "var(--fs-small)" }}><I.Mail width={16} height={16} /> {contacts.email}</span>
+                <span style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--neutral-300)", fontSize: "var(--fs-small)" }}><I.MapPin width={16} height={16} /> {contacts.address}</span>
               </div>
             </div>
             <Col title="Услуги" navigate={navigate} links={["Аудит", "Бухгалтерия", "Налоговый консалтинг", "Юридические услуги"]} />
-            <Col title="Международное" navigate={navigate} links={["КИК", "Зарубежные счета", "Регистрация компаний", "МСФО"]} />
+            <Col title="Международное" navigate={navigate} links={["КИК", "Зарубежные счета", "МСФО", "Открытие счетов"]} />
             <Col title="Компания" navigate={navigate} links={["О нас", "Команда", "Блог", "Контакты"]} />
           </div>
           <div className="ftr__bottom">
-            <span>© 2026 GSL Audit. Все права защищены.</span>
+            <span>© 2026 GSL Audit (ДЖИ ЭС ЭЛЬ-АУДИТ). Все права защищены.</span>
             <span style={{ display: "flex", gap: "var(--space-6)" }}>
               <a style={{ display: "inline" }}>Политика конфиденциальности</a>
               <a style={{ display: "inline" }}>Условия</a>

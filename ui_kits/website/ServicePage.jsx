@@ -22,7 +22,7 @@
           </nav>
         </div>
 
-        <section className="container" style={{ paddingBottom: "var(--space-12)" }}>
+        <section className="container reveal" style={{ paddingBottom: "var(--space-12)" }}>
           <Badge tone="accent">Аудит</Badge>
           <h1 style={{ fontSize: "var(--fs-h1)", letterSpacing: "var(--ls-tight)", lineHeight: 1.1, margin: "var(--space-4) 0 var(--space-5)", maxWidth: "18ch" }}>Аудит по РСБУ</h1>
           <p style={{ fontSize: "var(--fs-lead)", color: "var(--text-muted)", maxWidth: "60ch", lineHeight: "var(--lh-relaxed)" }}>
@@ -62,7 +62,7 @@
                   ))}
                 </div>
                 <Button variant="primary" fullWidth size="lg" onClick={() => navigate("contacts")}>Оставить заявку</Button>
-                <Button variant="ghost" fullWidth style={{ marginTop: 10 }} iconRight={<I.Phone width={16} height={16} />}>+7 495 234-38-44</Button>
+                <Button variant="ghost" fullWidth style={{ marginTop: 10 }} iconRight={<I.Phone width={16} height={16} />}>+7 495 921-37-55</Button>
               </Card>
             </aside>
           </div>

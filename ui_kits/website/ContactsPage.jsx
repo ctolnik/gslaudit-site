@@ -1,25 +1,32 @@
-// GSL Audit website — Contacts + request form
+// GSL Audit website — Contacts + request form (реальные контакты)
 (function () {
   const React = window.React;
   const NS = window.GSLAuditDesignSystem_166977;
   const { Button, Card, Input, Select, Checkbox, Alert } = NS;
   const I = window.GSLIcons;
-  const { services } = window.GSLData;
+  const { services, contacts } = window.GSLData;
 
   function ContactsPage() {
     const [sent, setSent] = React.useState(false);
     const [agree, setAgree] = React.useState(true);
 
+    const cards = [
+      { ic: "Phone", t: "Телефон", v: contacts.phones.join(" · "), d: contacts.note },
+      { ic: "Mail", t: "Почта", v: contacts.email, d: "Ответим в течение рабочего дня" },
+      { ic: "MapPin", t: "Офис", v: contacts.address, d: contacts.metro },
+      { ic: "Star", t: "Telegram", v: contacts.telegram, d: "Быстрый вопрос — в мессенджере" },
+    ];
+
     return (
       <section className="section container">
-        <div className="sec-head" style={{ marginBottom: "var(--space-10)" }}>
+        <div className="sec-head reveal" style={{ marginBottom: "var(--space-10)" }}>
           <span className="gsl-eyebrow">Контакты</span>
           <h2>Оставьте заявку</h2>
-          <p>Опишите задачу — менеджер свяжется в течение рабочего дня и предложит решение, сроки и стоимость.</p>
+          <p>Опишите задачу — специалист свяжется в течение рабочего дня и предложит решение, сроки и стоимость.</p>
         </div>
 
         <div className="grid-2" style={{ gridTemplateColumns: "1.1fr 0.9fr", alignItems: "start" }}>
-          <Card padding="lg" style={{ boxShadow: "var(--shadow-md)" }}>
+          <Card padding="lg" className="reveal" style={{ boxShadow: "var(--shadow-md)" }}>
             {sent ? (
               <Alert tone="success" title="Заявка отправлена">Спасибо! Мы свяжемся с вами в ближайшее время.</Alert>
             ) : (
@@ -39,14 +46,10 @@
           </Card>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-4)" }}>
-            {[
-              { ic: "Phone", t: "Телефон", v: "+7 495 234-38-44", d: "Пн–Пт, 10:00–19:00 МСК" },
-              { ic: "Mail", t: "Почта", v: "info@gsl.ru", d: "Ответим в течение дня" },
-              { ic: "MapPin", t: "Офис", v: "Москва, ул. Маросейка, 6/8с1", d: "Метро «Китай-город»" },
-            ].map((c) => {
+            {cards.map((c, i) => {
               const Ic = I[c.ic];
               return (
-                <Card key={c.t} padding="md" style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
+                <Card key={c.t} padding="md" className="reveal" data-d={i + 1} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
                   <span className="feature__ic"><Ic width={20} height={20} /></span>
                   <div>
                     <div style={{ fontSize: "var(--fs-caption)", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: ".08em", fontWeight: 600 }}>{c.t}</div>
